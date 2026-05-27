@@ -1,0 +1,3 @@
+{{- $content := .RawContent | resources.FromString (printf "normal/%s.html" .File.UniqueID) -}}
+{{- $content = $content | resources.ExecuteAsTemplate (printf "normal/%s.html" .File.UniqueID) . -}}
+{{- $content.Content | safeHTML -}}

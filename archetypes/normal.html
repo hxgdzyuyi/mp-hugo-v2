@@ -1,0 +1,20 @@
+{{- $name := replaceRE "\\.html$" "" .Path -}}
+{{- $fileSlug := replaceRE "^.*/" "" $name -}}
+{{- $parentSlug := replaceRE "^.*/" "" (replaceRE "/[^/]+$" "" $name) -}}
+{{- $slug := cond (and (eq $fileSlug "web") (ne $parentSlug $fileSlug)) $parentSlug $fileSlug -}}
+---
+title: "{{ replace $slug "-" " " | title }}"
+type: "normal"
+layout: "single"
+url: "/{{ $slug }}.html"
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ replace $slug "-" " " | title }}</title>
+</head>
+<body>
+</body>
+</html>

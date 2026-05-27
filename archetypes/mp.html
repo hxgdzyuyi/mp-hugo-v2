@@ -1,0 +1,14 @@
+{{- $name := replaceRE "\\.html$" "" .Path -}}
+{{- $fileSlug := replaceRE "^.*/" "" $name -}}
+{{- $parentSlug := replaceRE "^.*/" "" (replaceRE "/[^/]+$" "" $name) -}}
+{{- $slug := cond (and (eq $fileSlug "mp") (ne $parentSlug $fileSlug)) $parentSlug $fileSlug -}}
+---
+title: "{{ replace $slug "-" " " | title }}"
+date: "{{ .Date }}"
+type: "mp"
+layout: "single"
+url: "/mp/mp-{{ $slug }}.html"
+location: "北京"
+---
+<section>
+</section>

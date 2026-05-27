@@ -1,0 +1,41 @@
+<!doctype html>
+{{ $pageTitle := .Site.Title }}
+{{ if not .IsHome }}
+  {{ $pageTitle = printf "%s | %s" .Title .Site.Title }}
+{{ end }}
+{{ $description := .Site.Params.description }}
+{{ with .Params.description }}
+  {{ $description = . }}
+{{ else }}
+  {{ if .Summary }}
+    {{ $description = .Summary | plainify }}
+  {{ end }}
+{{ end }}
+<html lang="{{ .Site.LanguageCode | default `zh-CN` }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ $pageTitle }}</title>
+  {{ with $description }}
+    <meta name="description" content="{{ . }}">
+  {{ end }}
+  <link rel="stylesheet" href="{{ `static/weui.min.css` | relURL }}">
+  <link rel="stylesheet" href="{{ `static/tencent_portfolio_light.mnicjuz14bbf866e.css` | relURL }}">
+  {{ with resources.Get "css/app.css" }}
+    {{ $styles := . | minify }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+  {{ end }}
+</head>
+<body class="smartmd-site wx_wap_page mm_appmsg appmsg_skin_default appmsg_content_new_ui data_color_scheme_light smartmd-single-page" data-weui-theme="light">
+  {{ block "main" . }}{{ end }}
+  <aside class="smartmd-tools" id="smartmd-tools" aria-label="页面操作">
+    <div class="smartmd-copy-slot" id="smartmd-copy-slot">
+      {{ partial "wechat-copy.html" . }}
+    </div>
+  </aside>
+  {{ with resources.Get "js/wechat-copy.js" }}
+    {{ $script := . | minify }}
+    <script src="{{ $script.RelPermalink }}"></script>
+  {{ end }}
+</body>
+</html>

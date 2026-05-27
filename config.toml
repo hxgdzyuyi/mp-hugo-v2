@@ -1,0 +1,30 @@
+baseURL = '/'
+languageCode = 'zh-CN'
+title = 'Once Image to MP'
+uglyURLs = true
+disableKinds = ['taxonomy', 'term', 'RSS', 'section']
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[module]
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+  [[module.mounts]]
+    source = 'layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = 'archetypes'
+    target = 'archetypes'
+  [[module.mounts]]
+    source = 'assets/css'
+    target = 'assets/css'
+  [[module.mounts]]
+    source = 'assets/js'
+    target = 'assets/js'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
